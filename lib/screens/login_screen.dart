@@ -9,6 +9,7 @@ class LoginScreen extends StatelessWidget {
   @override
   TextEditingController countryCode = TextEditingController();
   TextEditingController phone = TextEditingController();
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
@@ -46,6 +47,7 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+  /// buildCountryCode
    Widget buildCountryCode(){
     return SizedBox(
       width: 80,
@@ -61,6 +63,7 @@ class LoginScreen extends StatelessWidget {
     );
    }
 
+   /// buildPhoneUI
   Widget buildPhoneUI(){
      return Expanded(
        child: TextFormField(
@@ -75,6 +78,7 @@ class LoginScreen extends StatelessWidget {
      );
   }
 
+  ///buildLoginButton
   Widget buildLoginButton(BuildContext context) {
     return Consumer<LoginProvider>(
       builder: (context, loginProvider, child) {
@@ -82,13 +86,12 @@ class LoginScreen extends StatelessWidget {
           width: 200,
           child: ElevatedButton(
             onPressed: () async {
-              final userModel = UserModel(countryCode: "${countryCode.text}", phone: phone.text);
+              final userModel = UserModel(countryCode: countryCode.text, phone: phone.text);
               await loginProvider.loginUser(userModel);
                 Navigator.pushNamed(context, AppRoutes.home);
-
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green.shade900,
+              backgroundColor: Colors.red.shade900,
             ),
             child: Text("Submit", style: TextStyle(color: Theme.of(context).secondaryHeaderColor)),
           ),

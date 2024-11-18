@@ -7,7 +7,6 @@ import '../utlis/urls.dart';
 
 
 class AddFeed with ChangeNotifier {
-
   bool _addSuccess = false;
   String? _errorMessage;
   bool get addSuccess => _addSuccess;

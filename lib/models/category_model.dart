@@ -11,9 +11,9 @@ class CategoryModel {
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
     return CategoryModel(
-      id: json['id'],
-      title: json['title'],
-      image: json['image'],
+      id: json['id'] != null ? int.tryParse(json['id'].toString()) : null,
+      title: json['title'] ?? '',
+      image: json['image'] ?? '',
     );
   }
 

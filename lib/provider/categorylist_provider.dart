@@ -27,10 +27,10 @@ class CategoryProvider with ChangeNotifier {
       final response = await http.get(
         url,
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 202) {
         final data = json.decode(response.body);
         print(data);
-        _categoryModel = (data['patient'] as List)
+        _categoryModel = (data['category'] as List)
             .map((item) => CategoryModel.fromJson(item))
             .toList();
 
@@ -44,5 +44,4 @@ class CategoryProvider with ChangeNotifier {
       notifyListeners();
     }
   }
-
 }

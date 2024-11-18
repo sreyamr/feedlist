@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         initialRoute: AppRoutes.login,
         routes: getAppRoute(),
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
           useMaterial3: true,
         ),
       ),
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
 Map<String,WidgetBuilder> getAppRoute(){
   return{
     AppRoutes.login:(context)=> LoginScreen(),
-    AppRoutes.home:(context)=> const HomeScreen(),
-    AppRoutes.addFeed:(context)=> const AddFeedScreen(),
+    AppRoutes.home:(context)=> HomeScreen(),
+    AppRoutes.addFeed:(context)=> AddFeedScreen(),
   };
 }

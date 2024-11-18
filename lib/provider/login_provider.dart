@@ -28,7 +28,7 @@ class LoginProvider with ChangeNotifier {
         },
         body: jsonData,
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 202) {
         final data = json.decode(response.body);
         print(data);
 

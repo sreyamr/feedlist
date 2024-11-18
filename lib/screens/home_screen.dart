@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:round2/provider/categorylist_provider.dart';
 import 'package:round2/provider/home_provider.dart';
-
 import '../config/approutes.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,15 +11,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final categoryList = Provider.of<CategoryProvider>(context, listen: false);
-      categoryList.getCategoryList();
+      //  final categoryList = Provider.of<CategoryProvider>(context, listen: false);
+      // categoryList.getCategoryList();
       final homeProvider = Provider.of<FeedListProvider>(context, listen: false);
       homeProvider.getFeedList();
     });
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home Screen"),
+        title: const Text("Hello"),
       ),
       body: Consumer<FeedListProvider>(
         builder: (context, feedListProvider, child) {
@@ -28,31 +27,35 @@ class HomeScreen extends StatelessWidget {
           if (feedListProvider.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-
           if (feedListProvider.feedList.isEmpty) {
             return const Center(child: Text("No feed data available"));
           }
-
           return ListView.builder(
             itemCount: feedListProvider.feedList.length,
             itemBuilder: (context, index) {
               final feedItem = feedListProvider.feedList[index];
-              final result = feedItem.results?.isNotEmpty == true ? feedItem.results![0] : null;
-
-              return Card(
-                margin: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  leading: Image.network(
-                    result!.image.toString(),
-                    width: 50,
-                    height: 50,
-                    fit: BoxFit.cover,
+              print(feedItem);
+              return ListTile(
+                contentPadding: EdgeInsets.all(8.0),
+                title: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      feedItem.image!.isNotEmpty
+                          ? Image.network(
+                        feedItem.image.toString(),
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      )
+                          : const Icon(Icons.image, size: 100),
+                      const SizedBox(height: 8),
+                      Text(
+                        feedItem.description.toString(),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
-                  title: Text(result!.description.toString()),
-                 // subtitle: Text('Likes: ${feedItem.likes.length}'),
-                  onTap: () {
-                    // Handle item tap, if needed
-                  },
                 ),
               );
             },
@@ -63,6 +66,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  ///  _buildFloatingActionButton
   Widget _buildFloatingActionButton(BuildContext context) {
     return FloatingActionButton.extended(
       onPressed: () {
@@ -75,7 +79,8 @@ class HomeScreen extends StatelessWidget {
           color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Colors.red.shade900,
     );
   }
+
 }
